@@ -1,6 +1,7 @@
 package com.example.oracle.dao;
 
 import com.example.oracle.vo.EmpVO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
+@Slf4j
 public class EmpDAO {
     private final JdbcTemplate jdbcTemplate;
 
@@ -20,7 +22,7 @@ public class EmpDAO {
         return jdbcTemplate.query(query, new EmpRowMapper());
     }
 
-    public void empInsert() {
+    public void empInsert(EmpVO emp) {
         String query = "INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(query, emp.getEmpNO(), emp.getName(), emp.getJob(), emp.getMgr(), emp.getDate(), emp.getSal(), emp.getComm(), emp.getDeptNO());
     }
